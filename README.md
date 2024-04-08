@@ -2,6 +2,10 @@
 
 Welcome to the backend repository for the DEAUTH platform.
 
+## project video link
+
+[Click here to watch the video](https://drive.google.com/file/d/1BrkGIdxUUgOZf7hpsGZNy4BBlWmBMWGp/view?usp=sharing)
+
 ### ✅ Additional Feature: Multiple Design Submission and NFT Creation
 
 ### Challenge:
