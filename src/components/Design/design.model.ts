@@ -29,6 +29,7 @@ const DesignSchema: Schema = new Schema({
 });
 
 // Function to add a child NFT to the parent NFT
+// eslint-disable-next-line func-names
 DesignSchema.methods.addChildNft = function (owner: string, token_id: string) {
   this.parent_nft.child_nft.push({ owner, token_id });
 };
