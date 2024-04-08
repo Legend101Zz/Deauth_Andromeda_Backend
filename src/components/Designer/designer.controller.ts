@@ -5,7 +5,7 @@ import { Designer } from './designer.model';
 const createDesigner = async (req: Request, res: Response) => {
   try {
     // eslint-disable-next-line @typescript-eslint/naming-convention
-    const { wallet_addr, marketplace_addr } = req.body;
+    const { wallet_addr, marketplace_addr, cw721_addr } = req.body;
 
     // Check if designer with provided wallet address already exists
     const existingDesigner = await Designer.findOne({ wallet_addr });
@@ -17,9 +17,10 @@ const createDesigner = async (req: Request, res: Response) => {
 
     // Create new designer
     const designer = new Designer({
-      designs: [], // Assuming initially no designs are associated
+      designs: [],
       wallet_addr,
       marketplace_addr,
+      cw721_addr,
     });
 
     // Save the designer to the database
