@@ -1,40 +1,50 @@
-import mongoose, { Schema, Document } from 'mongoose';
+import mongoose, { Schema, Document, Model } from 'mongoose';
 
-const ChildNftSchema = new Schema({
+interface IChildNft {
+  owner: string;
+  token_id: string;
+}
+
+interface IParentNft {
+  owner: string;
+  token_id: string;
+  child_nft: IChildNft[];
+}
+
+export interface IDesign extends Document {
+  parent_nft: IParentNft;
+  splitter_addr: string;
+  timelock_addr: string;
+  addChildNft: (owner: string, token_id: string) => void; // Define the method signature
+}
+
+const ChildNftSchema = new Schema<IChildNft>({
   owner: String,
   token_id: String,
 });
 
-const ParentNftSchema = new Schema({
+const ParentNftSchema = new Schema<IParentNft>({
   owner: String,
   token_id: String,
   child_nft: [ChildNftSchema],
 });
 
-export interface IDesign extends Document {
-  parent_nft: {
-    owner: string;
-    token_id: string;
-    child_nft: Array<{
-      owner: string;
-      token_id: string;
-    }>;
-  };
-  splitter_addr: string;
-  timelock_addr: string;
-}
-
-const DesignSchema: Schema = new Schema({
+const DesignSchema = new Schema<IDesign>({
   parent_nft: ParentNftSchema,
   splitter_addr: String,
   timelock_addr: String,
 });
 
-// Function to add a child NFT to the parent NFT
-// eslint-disable-next-line func-names
-DesignSchema.methods.addChildNft = function (owner: string, token_id: string) {
+// Define the method to add a child NFT to the parent NFT
+DesignSchema.methods.addChildNft = function (
+  this: IDesign,
+  owner: string,
+  token_id: string,
+) {
   this.parent_nft.child_nft.push({ owner, token_id });
 };
 
-// Create and export the model
-export const Design = mongoose.model<IDesign>('Design', DesignSchema);
+export const Design: Model<IDesign> = mongoose.model<IDesign>(
+  'Design',
+  DesignSchema,
+);

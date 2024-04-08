@@ -19,6 +19,7 @@ app.use(httpLogger.successHandler);
 app.use(httpLogger.errorHandler);
 app.use(uniqueReqId);
 app.use(express.json());
+app.use(cors());
 app.use(consts.API_ROOT_PATH, api);
 app.use(swaggerApiDocs);
 app.use(http404);
