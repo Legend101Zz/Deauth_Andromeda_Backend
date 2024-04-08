@@ -4,11 +4,16 @@ interface IChildNft {
   owner: string;
   token_id: string;
 }
+interface IReferenceNft {
+  owner: string;
+  token_id: string;
+}
 
 interface IParentNft {
   owner: string;
   token_id: string;
   child_nft: IChildNft[];
+  reference_nft: IReferenceNft;
 }
 
 export interface IDesign extends Document {
