@@ -32,6 +32,10 @@ const createDesignAndAssociateDesigner = async (
         owner: designerWalletAddr,
         token_id: parentNftTokenId,
         child_nft: [], // Initially empty child NFT array
+        reference_nft: {
+          owner: '',
+          token_id: '',
+        },
       },
       splitter_addr: splitterAddr || '', // Use provided value or default to empty string
       timelock_addr: timelockAddr || '', // Use provided value or default to empty string
