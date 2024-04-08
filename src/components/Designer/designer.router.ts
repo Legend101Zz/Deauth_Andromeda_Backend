@@ -5,10 +5,6 @@ import { createDesigner } from './designer.controller';
 
 const router: Router = Router();
 
-router.get('/test', (req, res) => {
-  res.send('Manager route');
-});
-
 router.post('/designer/create', [protectedByApiKey], createDesigner);
 
 export default router;

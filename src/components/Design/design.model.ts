@@ -6,12 +6,14 @@ const ChildNftSchema = new Schema({
 });
 
 const ParentNftSchema = new Schema({
+  owner: String,
   token_id: String,
   child_nft: [ChildNftSchema],
 });
 
 export interface IDesign extends Document {
   parent_nft: {
+    owner: string;
     token_id: string;
     child_nft: Array<{
       owner: string;
